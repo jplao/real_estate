@@ -45,7 +45,92 @@ class HouseTest < Minitest::Test
     room_2 = Room.new(:bedroom, 11, 15)
     house.add_room(room_1)
     house.add_room(room_2)
-    
+
     assert_equal [room_1, room_2], house.rooms
   end
+
+  def test_it_can_access_bedrooms
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, 13)
+    room_2 = Room.new(:bedroom, 11, 15)
+    room_3 = Room.new(:living_room, 25, 15)
+    room_4 = Room.new(:basement, 30, 41)
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected = [room_1, room_2]
+    actual = house.rooms_from_category(:bedroom)
+    assert_equal expected, actual
+
+    expected_1 = [room_4]
+    actual_1 = house.rooms_from_category(:basement)
+    assert_equal expected_1, actual_1
+  end
+
+  def test_it_can_total_area_of_all_rooms
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, 13)
+    room_2 = Room.new(:bedroom, 11, 15)
+    room_3 = Room.new(:living_room, 25, 15)
+    room_4 = Room.new(:basement, 30, 41)
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected = 1900
+    actual = house.area
+    assert_equal expected, actual
+  end
+
+  def test_it_can_calculate_price_per_square_foot
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, 13)
+    room_2 = Room.new(:bedroom, 11, 15)
+    room_3 = Room.new(:living_room, 25, 15)
+    room_4 = Room.new(:basement, 30, 41)
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected = 210.53
+    actual = house.price_per_square_foot
+    assert_equal expected, actual
+  end
+
+  def test_it_can_sort_rooms_by_area
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, 13)
+    room_2 = Room.new(:bedroom, 11, 15)
+    room_3 = Room.new(:living_room, 25, 15)
+    room_4 = Room.new(:basement, 30, 41)
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected = [room_4, room_3, room_2, room_1]
+    actual = house.rooms_sorted_by_area
+    assert_equal expected, actual
+  end
+
+  def test_it_can_sort_rooms_by_area
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, 13)
+    room_2 = Room.new(:bedroom, 11, 15)
+    room_3 = Room.new(:living_room, 25, 15)
+    room_4 = Room.new(:basement, 30, 41)
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected =
+    actual = house.rooms_sorted_by_category
+    assert_equal expected, actual
+  end
+
 end
