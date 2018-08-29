@@ -6,7 +6,7 @@ class Room
               :given_length,
               :given_width
 
-  def initialize(category, given_length, given_width)
+  def initialize(category = {}, given_length, given_width)
     @category = category
     @given_length = given_length
     @given_width = given_width
@@ -15,5 +15,5 @@ class Room
   def area
     @given_length * @given_width
   end
-binding.pry
+
 end
