@@ -68,4 +68,20 @@ class HouseTest < Minitest::Test
     actual_1 = house.rooms_from_category(:basement)
     assert_equal expected_1, actual_1
   end
+
+  def test_it_can_total_area_of_all_rooms
+    house = House.new("$400000", "123 sugar lane")
+    room_1 = Room.new(:bedroom, 10, 13)
+    room_2 = Room.new(:bedroom, 11, 15)
+    room_3 = Room.new(:living_room, 25, 15)
+    room_4 = Room.new(:basement, 30, 41)
+    house.add_room(room_1)
+    house.add_room(room_2)
+    house.add_room(room_3)
+    house.add_room(room_4)
+
+    expected = 1900
+    actual = house.area
+    assert_equal expected, actual
+  end
 end
